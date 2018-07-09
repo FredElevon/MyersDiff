@@ -11,18 +11,18 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/google-diff-match-patch/google-diff-match-patch -->
-        <dependency>
-            <groupId>google-diff-match-patch</groupId>
-            <artifactId>google-diff-match-patch</artifactId>
-            <version>0.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>google-diff-match-patch</groupId>-->
+            <!--<artifactId>google-diff-match-patch</artifactId>-->
+            <!--<version>0.1</version>-->
+        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.googlecode.java-diff-utils/diffutils -->
-        <!--<dependency>-->
-            <!--<groupId>com.googlecode.java-diff-utils</groupId>-->
-            <!--<artifactId>diffutils</artifactId>-->
-            <!--<version>1.3.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.googlecode.java-diff-utils</groupId>
+            <artifactId>diffutils</artifactId>
+            <version>1.3.0</version>
+        </dependency>
 
     </dependencies>
     

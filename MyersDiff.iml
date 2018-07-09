@@ -12,5 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: google-diff-match-patch:google-diff-match-patch:0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.java-diff-utils:diffutils:1.3.0" level="project" />
   </component>
 </module>
