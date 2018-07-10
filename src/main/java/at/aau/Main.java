@@ -28,15 +28,17 @@ public class Main {
 
         int i = 0;
 
-   /*     LinkedList list = new LinkedList();
-        list.add(1);
-        list.add(2);
-
-        System.out.println(list.toString()); */
 
         for (Object o : patch.getDeltas()) {
             Delta delta = (Delta) o;
             System.out.println(delta.toString());
+
+            int u = delta.getOriginal().toString().substring(2).indexOf("[")+3; // start quo. ori.
+            int v = delta.getOriginal().toString().substring(u).indexOf("]") + u; // end quo. ori.
+
+            int s = delta.getRevised().toString().substring(2).indexOf("[")+3; //start quotation revised content
+            int t = delta.getRevised().toString().substring(s).indexOf("]") + s; //end quotation revised content
+
 
             if (delta.toString().substring(1, 8).contains("Change")) {
                 diffInfo.setActionType("UPDATE");
@@ -49,15 +51,16 @@ public class Main {
             }
 
 
-            diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().length());
-
             diffInfo.setSrcID(i);
             diffInfo.setSrcStartLine(delta.getOriginal().getPosition());
             diffInfo.setSrcEndLine(delta.getOriginal().size() - 1 + delta.getOriginal().getPosition());
+            diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());
 
             diffInfo.setDstID(i);
             diffInfo.setDstStartLine(delta.getRevised().getPosition());
             diffInfo.setDstEndLine(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
+            diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length());
+
 
             System.out.println("ActionType: " + diffInfo.getActionType());
 
@@ -65,10 +68,13 @@ public class Main {
             System.out.println("srcStartLine: " + diffInfo.getSrcStartLine());
             System.out.println("srcEndline: " + diffInfo.getSrcEndLine());
             System.out.println("srcEndlineOffset: " + diffInfo.getSrcEndLineOffset());
+
             System.out.println("dstStartLine: " + diffInfo.getDstStartLine());
             System.out.println("dstEndline: " + diffInfo.getDstEndLine());
+            System.out.println("dstEndlineOffset: " + diffInfo.getDstEndLineOffset());
             System.out.println("dstID: " + diffInfo.getDstID());
-            
+
+
             i++;
         }
 
@@ -82,6 +88,7 @@ public class Main {
         try (Stream<String> lines = Files.lines(path)) {
             lines.forEach(s -> liste.add(s));
         }  catch (IOException ex) {
+            System.out.println("Something doesn't work!");
         }
         return liste;
     }
