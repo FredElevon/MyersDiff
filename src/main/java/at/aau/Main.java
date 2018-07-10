@@ -1,8 +1,6 @@
 package at.aau;
 
-
 import difflib.*;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,32 +11,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        List<String> original = fileToLines("originalFile.txt");
-        List<String> revised  = fileToLines("revisedFile.txt");
+        List<DiffInfo> myList = diffFiles("testoriginal.txt", "testrevised.txt");
+        System.out.println();
+//        System.out.println(myList.get(1).getActionType());
+        System.out.println("done.");
+    }
+
+    public static List<DiffInfo> diffFiles(String srcFilename, String dstFilename) {
+
+        List<String> original = fileToLines(srcFilename);
+        List<String> revised  = fileToLines(dstFilename);
 
         // Compute diff. Get the Patch object. Patch is the container for computed deltas.
         Patch patch = DiffUtils.diff(original, revised);
 
 
-        DiffInfo diffInfo = new DiffInfo();
+        ArrayList<DiffInfo> diffList = new ArrayList<>();
 
         int i = 0;
 
 
         for (Object o : patch.getDeltas()) {
+            DiffInfo diffInfo = new DiffInfo();
             Delta delta = (Delta) o;
             System.out.println(delta.toString());
 
-            int u = delta.getOriginal().toString().substring(2).indexOf("[")+3; // start quo. ori.
-            int v = delta.getOriginal().toString().substring(u).indexOf("]") + u; // end quo. ori.
 
-            int s = delta.getRevised().toString().substring(2).indexOf("[")+3; //start quotation revised content
-            int t = delta.getRevised().toString().substring(s).indexOf("]") + s; //end quotation revised content
 
+            int u = delta.getOriginal().toString().substring(2).indexOf("[") + 3; // start quo. ori.
+            int v = delta.getOriginal().toString().length() - 2; // end quo. ori.
+            //diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());
+            diffInfo.setSrcEndLineOffset((original.get(original.size()-1).length()));
+
+            int s = delta.getRevised().toString().substring(2).indexOf("[") + 3; //start quotation revised content
+            int t = delta.getRevised().toString().length() - 2; //end quotation revised content
+            //diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length());
+            diffInfo.setDstEndLineOffset((revised.get(revised.size()-1).length()));
 
             if (delta.toString().substring(1, 8).contains("Change")) {
                 diffInfo.setActionType("UPDATE");
@@ -54,13 +66,20 @@ public class Main {
             diffInfo.setSrcID(i);
             diffInfo.setSrcStartLine(delta.getOriginal().getPosition());
             diffInfo.setSrcEndLine(delta.getOriginal().size() - 1 + delta.getOriginal().getPosition());
-            diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());
+
 
             diffInfo.setDstID(i);
             diffInfo.setDstStartLine(delta.getRevised().getPosition());
-            diffInfo.setDstEndLine(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
-            diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length());
 
+            if (diffInfo.getActionType() == "DELETE") {
+                diffInfo.setDstEndLine(delta.getRevised().size() + delta.getRevised().getPosition());
+            } else {
+                diffInfo.setDstEndLine(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
+            }
+
+
+
+            diffList.add(diffInfo);
 
             System.out.println("ActionType: " + diffInfo.getActionType());
 
@@ -77,11 +96,10 @@ public class Main {
 
             i++;
         }
-
-
+        return diffList;
     }
 
-    private static List<String> fileToLines(String fileName) {
+    public static List<String> fileToLines(String fileName) {
         ArrayList<String> liste = new ArrayList<>();
 
         Path path = Paths.get(fileName);
