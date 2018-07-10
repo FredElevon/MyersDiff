@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        List<DiffInfo> myList = diffFiles("testoriginal.txt", "testrevised.txt");
+        List<DiffInfo> myList = diffFiles("newlineCRLF.txt", "newlineCRLFrevised.txt");
         System.out.println();
 //        System.out.println(myList.get(1).getActionType());
         System.out.println("done.");
@@ -42,22 +42,22 @@ public class Main {
 
 
 
-            int u = delta.getOriginal().toString().substring(2).indexOf("[") + 3; // start quo. ori.
+            /*int u = delta.getOriginal().toString().substring(2).indexOf("[") + 3; // start quo. ori.
             int v = delta.getOriginal().toString().length() - 2; // end quo. ori.
-            //diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());
+            diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());*/
             diffInfo.setSrcEndLineOffset((original.get(original.size()-1).length()));
 
-            int s = delta.getRevised().toString().substring(2).indexOf("[") + 3; //start quotation revised content
+            /*int s = delta.getRevised().toString().substring(2).indexOf("[") + 3; //start quotation revised content
             int t = delta.getRevised().toString().length() - 2; //end quotation revised content
-            //diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length());
+            diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length()); */
             diffInfo.setDstEndLineOffset((revised.get(revised.size()-1).length()));
 
-            
+
             if (delta.getType().equals(Delta.TYPE.CHANGE)) {
                 diffInfo.setActionType("UPDATE");
             } else if (delta.getType().equals(Delta.TYPE.INSERT)) {
                 diffInfo.setActionType("INSERT");
-            } else if (delta.getType().equals(Delta.TYPE.DELETE) {
+            } else if (delta.getType().equals(Delta.TYPE.DELETE)) {
                 diffInfo.setActionType("DELETE");
             } else {
                 diffInfo.setActionType("UNKNOWN");
