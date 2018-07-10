@@ -20,7 +20,6 @@
         </plugins>
     </build>
 
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/google-diff-match-patch/google-diff-match-patch -->
         <!--<dependency>-->
@@ -42,9 +41,7 @@
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
 
 
-    
 </project>
