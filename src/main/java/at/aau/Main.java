@@ -81,12 +81,12 @@ public class Main {
 
     }
 
-    public static List<String> fileToLines(String fileName) {
+    private static List<String> fileToLines(String fileName) {
         ArrayList<String> liste = new ArrayList<>();
 
         Path path = Paths.get(fileName);
         try (Stream<String> lines = Files.lines(path)) {
-            lines.forEach(s -> liste.add(s));
+            lines.forEach(liste::add);
         }  catch (IOException ex) {
             System.out.println("Something doesn't work!");
         }
