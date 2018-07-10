@@ -49,25 +49,24 @@ public class Main {
             }
 
 
-            diffInfo.setSrcEndlineOffset(delta.getOriginal().toString().length());
+            diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().length());
 
             diffInfo.setSrcID(i);
             diffInfo.setSrcStartLine(delta.getOriginal().getPosition());
-            diffInfo.setSrcEndline(delta.getOriginal().size() - 1 + delta.getOriginal().getPosition());
+            diffInfo.setSrcEndLine(delta.getOriginal().size() - 1 + delta.getOriginal().getPosition());
 
             diffInfo.setDstID(i);
             diffInfo.setDstStartLine(delta.getRevised().getPosition());
-            diffInfo.setDstEndline(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
+            diffInfo.setDstEndLine(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
 
             System.out.println("ActionType: " + diffInfo.getActionType());
 
             System.out.println("srcID: " + diffInfo.getSrcID());
             System.out.println("srcStartLine: " + diffInfo.getSrcStartLine());
-            System.out.println("srcEndline: " + diffInfo.getSrcEndline());
-            System.out.println("srcEndlineOffset: " + diffInfo.getSrcEndlineOffset());
-
+            System.out.println("srcEndline: " + diffInfo.getSrcEndLine());
+            System.out.println("srcEndlineOffset: " + diffInfo.getSrcEndLineOffset());
             System.out.println("dstStartLine: " + diffInfo.getDstStartLine());
-            System.out.println("dstEndline: " + diffInfo.getDstEndline());
+            System.out.println("dstEndline: " + diffInfo.getDstEndLine());
             System.out.println("dstID: " + diffInfo.getDstID());
             
             i++;
