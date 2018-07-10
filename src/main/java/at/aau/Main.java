@@ -52,11 +52,12 @@ public class Main {
             //diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length());
             diffInfo.setDstEndLineOffset((revised.get(revised.size()-1).length()));
 
-            if (delta.toString().substring(1, 8).contains("Change")) {
+            
+            if (delta.getType().equals(Delta.TYPE.CHANGE)) {
                 diffInfo.setActionType("UPDATE");
-            } else if (delta.toString().substring(1, 8).contains("Insert")) {
+            } else if (delta.getType().equals(Delta.TYPE.INSERT)) {
                 diffInfo.setActionType("INSERT");
-            } else if (delta.toString().substring(1,8).contains("Delete")) {
+            } else if (delta.getType().equals(Delta.TYPE.DELETE) {
                 diffInfo.setActionType("DELETE");
             } else {
                 diffInfo.setActionType("UNKNOWN");
@@ -71,7 +72,7 @@ public class Main {
             diffInfo.setDstID(i);
             diffInfo.setDstStartLine(delta.getRevised().getPosition());
 
-            if (diffInfo.getActionType() == "DELETE") {
+            if (diffInfo.getActionType().equals("DELETE")) {
                 diffInfo.setDstEndLine(delta.getRevised().size() + delta.getRevised().getPosition());
             } else {
                 diffInfo.setDstEndLine(delta.getRevised().size() - 1 + delta.getRevised().getPosition());
@@ -92,7 +93,6 @@ public class Main {
             System.out.println("dstEndline: " + diffInfo.getDstEndLine());
             System.out.println("dstEndlineOffset: " + diffInfo.getDstEndLineOffset());
             System.out.println("dstID: " + diffInfo.getDstID());
-
 
             i++;
         }
