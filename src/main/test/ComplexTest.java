@@ -6,7 +6,7 @@ import java.util.List;
 
 import static at.aau.Main.diffFiles;
 
-public class ComplexTests {
+public class ComplexTest {
     @Test
     public void simpleUpdateTest() { // Files: testoriginal.txt; testrevised.txt
         List<DiffInfo> myList = diffFiles("complextestfiles/Test.java", "complextestfiles/Test_new.java");
