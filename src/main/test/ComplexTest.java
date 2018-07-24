@@ -17,11 +17,11 @@ public class ComplexTest {
         Assert.assertEquals(4, updateInfo.getSrcStartLine());
         Assert.assertEquals(0, updateInfo.getSrcStartLineOffset());
         Assert.assertEquals(8, updateInfo.getSrcEndLine());
-        Assert.assertEquals(3, updateInfo.getSrcEndLineOffset());
+        Assert.assertEquals(5, updateInfo.getSrcEndLineOffset());
         Assert.assertEquals(0, updateInfo.getDstID());
         Assert.assertEquals(4, updateInfo.getDstStartLine());
         Assert.assertEquals(0, updateInfo.getDstStartLineOffset());
-        Assert.assertEquals(1, updateInfo.getDstEndLine());
+        Assert.assertEquals(4, updateInfo.getDstEndLine());
         Assert.assertEquals(36, updateInfo.getDstEndLineOffset());
         
     }

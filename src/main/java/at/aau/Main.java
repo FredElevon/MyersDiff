@@ -45,13 +45,19 @@ public class Main {
             /*int u = delta.getOriginal().toString().substring(2).indexOf("[") + 3; // start quo. ori.
             int v = delta.getOriginal().toString().length() - 2; // end quo. ori.
             diffInfo.setSrcEndLineOffset(delta.getOriginal().toString().substring(u,v).length());*/
-            diffInfo.setSrcEndLineOffset((original.get(original.size()-1).length()));
 
+            List originalLines = delta.getOriginal().getLines();
+            if (!originalLines.isEmpty()) {
+                diffInfo.setSrcEndLineOffset(originalLines.get(originalLines.size() - 1).toString().length());
+            }
             /*int s = delta.getRevised().toString().substring(2).indexOf("[") + 3; //start quotation revised content
             int t = delta.getRevised().toString().length() - 2; //end quotation revised content
             diffInfo.setDstEndLineOffset(delta.getRevised().toString().substring(s,t).length()); */
-            diffInfo.setDstEndLineOffset((revised.get(revised.size()-1).length()));
 
+            List revisedLines = delta.getRevised().getLines();
+            if (!revisedLines.isEmpty()) {
+                diffInfo.setDstEndLineOffset((revisedLines.get(revisedLines.size() - 1).toString().length()));
+            }
 
             if (delta.getType().equals(Delta.TYPE.CHANGE)) {
                 diffInfo.setActionType("UPDATE");
