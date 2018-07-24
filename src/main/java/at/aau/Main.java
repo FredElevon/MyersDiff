@@ -86,10 +86,12 @@ public class Main {
 
             System.out.println("srcID: " + diffInfo.getSrcID());
             System.out.println("srcStartLine: " + diffInfo.getSrcStartLine());
+            System.out.println("srcStartLineOffset: " + diffInfo.getSrcStartLineOffset());
             System.out.println("srcEndline: " + diffInfo.getSrcEndLine());
             System.out.println("srcEndlineOffset: " + diffInfo.getSrcEndLineOffset());
 
             System.out.println("dstStartLine: " + diffInfo.getDstStartLine());
+            System.out.println("dstStartLineOffset: " + diffInfo.getDstStartLineOffset());
             System.out.println("dstEndline: " + diffInfo.getDstEndLine());
             System.out.println("dstEndlineOffset: " + diffInfo.getDstEndLineOffset());
             System.out.println("dstID: " + diffInfo.getDstID());
