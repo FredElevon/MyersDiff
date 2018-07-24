@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        List<DiffInfo> myList = diffFiles("newlineCRLF.txt", "newlineCRLFrevised.txt");
+        List<DiffInfo> myList = diffFiles("PromotingEmployees.txt", "PromotingEmployees1.txt");
         System.out.println();
 //        System.out.println(myList.get(1).getActionType());
         System.out.println("done.");
